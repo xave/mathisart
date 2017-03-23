@@ -1,4 +1,4 @@
-module Handler.Home where
+module Handler.Visualize where
 
 import Import
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
@@ -17,29 +17,21 @@ data FileForm = FileForm
 -- The majority of the code you will write in Yesod lives in these handler
 -- functions. You can spread them across multiple files if you are so
 -- inclined, or create a single monolithic file.
-getHomeR :: Handler Html
-getHomeR = do
-    --(formWidget, formEnctype) <- generateFormPost sampleForm
-    --let submission = Nothing :: Maybe FileForm
-    --    handlerName = "getHomeR" :: Text
-    --defaultLayout $ do
-    --    let (commentFormId, commentTextareaId, commentListId) = commentIds
-    --    aDomId <- newIdent
-    --    setTitle "Math is Art"
-    --    $(widgetFile "homepage")
-    (formWidget, formEnctype) <- generateFormPost sampleForm
-    let submission = Nothing :: Maybe FileForm
-        handlerName = "getHomeR" :: Text
-    defaultLayout $ do
-        let (commentFormId, commentTextareaId, commentListId) = commentIds
-        aDomId <- newIdent
-        setTitle "Math is Art"
-        $(widgetFile "homepage")
+getVisualizeR :: Handler Html
+getVisualizeR = do
+   (formWidget, formEnctype) <- generateFormPost sampleForm
+   let submission = Nothing :: Maybe FileForm
+       handlerName = "getVisualizeR" :: Text
+   defaultLayout $ do
+       let (commentFormId, commentTextareaId, commentListId) = commentIds
+       aDomId <- newIdent
+       setTitle "Math is Art"
+       $(widgetFile "visualize")
 
-postHomeR :: Handler Html
-postHomeR = do
+postVisualizeR :: Handler Html
+postVisualizeR = do
     ((result, formWidget), formEnctype) <- runFormPost sampleForm
-    let handlerName = "postHomeR" :: Text
+    let handlerName = "postVisualizeR" :: Text
         submission = case result of
             FormSuccess res -> Just res
             _ -> Nothing
@@ -48,7 +40,7 @@ postHomeR = do
         let (commentFormId, commentTextareaId, commentListId) = commentIds
         aDomId <- newIdent
         setTitle "Xavier Posted!"
-        $(widgetFile "homepage")
+        $(widgetFile "visualize")
 
 sampleForm :: Form FileForm
 sampleForm = renderBootstrap3 BootstrapBasicForm $ FileForm
