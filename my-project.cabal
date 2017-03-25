@@ -25,6 +25,7 @@ library
                      Handler.Comment
                      Handler.Profile
                      Handler.Visualize
+                     Handler.MySubsite
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -130,6 +131,7 @@ test-suite test
                        Handler.CommonSpec
                        Handler.HomeSpec
                        Handler.ProfileSpec
+                       Handler.MySubsite
                        TestImport
     hs-source-dirs:    test
     ghc-options:       -Wall

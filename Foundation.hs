@@ -25,7 +25,10 @@ data App = App
     , appConnPool    :: ConnectionPool -- ^ Database connection pool.
     , appHttpManager :: Manager
     , appLogger      :: Logger
+    , getMySubsite   :: MySubsite
     }
+-- Foundation datatype for Xavier subsite
+data MySubsite = MySubsite
 
 data MenuItem = MenuItem
     { menuItemLabel :: Text
@@ -50,10 +53,17 @@ data MenuTypes
 -- type Handler = HandlerT App IO
 -- type Widget = WidgetT App IO ()
 mkYesodData "App" $(parseRoutesFile "config/routes")
+-- Added by Xavier for the subsite
+mkYesodSubData "MySubsite" $(parseRoutesFile "config/subroutes") -- Should I have a separate route for the subsite?
 
 -- | A convenient synonym for creating forms.
 type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 
+--instance Yesod master => YesodSubDispatch MySubsite (HandlerT master IO) where
+--    yesodSubDispatch = $(mkYesodSubDispatch resourceMySubsite)
+
+instance Yesod app  => YesodSubDispatch MySubsite (HandlerT app IO) where
+    yesodSubDispatch = $(mkYesodSubDispatch resourceMySubsite)
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
