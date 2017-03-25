@@ -116,11 +116,6 @@ instance Yesod App where
                     , menuItemRoute = VisualizeR
                     , menuItemAccessCallback = True
                     }
-                , NavbarLeft $ MenuItem
-                    { menuItemLabel = "MySubSite"
-                    , menuItemRoute = MySubsiteR
-                    , menuItemAccessCallback = True
-                    }
                 , NavbarRight $ MenuItem
                     { menuItemLabel = "Login"
                     , menuItemRoute = AuthR LoginR
